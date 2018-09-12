@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import './App.css';
+import Album from './components/Album.js';
 import Landing from './components/Landing.js';
 import Library from './components/Library.js';
 
