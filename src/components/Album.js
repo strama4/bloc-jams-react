@@ -12,7 +12,8 @@ class Album extends Component {
         this.state = {
             album:  album,
             currentSong: album.songs[0],
-            isPlaying: false
+            isPlaying: false,
+            isHovering: null
         };
 
         this.audioElement = document.createElement('audio');
@@ -37,13 +38,34 @@ class Album extends Component {
     handleSongClick(song) {
         const isSameSong = this.state.currentSong === song;
         if (isSameSong && this.state.isPlaying) {
-            this.pause()
+            this.pause();
         } else {
             if (!isSameSong) { this.setSong(song); }
             this.play();
         }
     }
 
+    handleMouseOver(index) {
+        this.setState({ isHovering: index });        
+    }
+
+    handleMouseOut() {
+        this.setState({ isHovering: null });
+    }
+
+    renderIcons(song, index) {
+        if (song === this.state.currentSong && this.state.isPlaying) {
+            return <ion-icon name="pause"></ion-icon>;
+        } 
+        if (song === this.state.currentSong && !this.state.isPlaying) {
+            return <ion-icon name="play"></ion-icon>;
+        } 
+        if (this.state.isHovering === index && song !== this.state.currentSong) {
+            return <ion-icon name="play"></ion-icon>;
+        }    
+        return <span>{index + 1}. </span>
+        }        
+            
     render() {
         return (
             <section className="album">
@@ -65,8 +87,12 @@ class Album extends Component {
                     { 
                         this.state.album.songs.map((song, index) => {
                             return (
-                                <tr key={index} className="song" onClick={() => this.handleSongClick(song)}>
-                                    {index + 1}. {song.title} - {song.duration} seconds.
+                                <tr key={index} className="song"                                 
+                                onClick={() => this.handleSongClick(song, index)}
+                                onMouseOver={() => this.handleMouseOver(index)}
+                                onMouseOut={() => this.handleMouseOut()}
+                                >
+                                    {this.renderIcons(song, index)} {song.title} - {song.duration} seconds.
                                 </tr>
                             );
                         })
