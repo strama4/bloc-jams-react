@@ -165,7 +165,7 @@ class Album extends Component {
                                 onMouseOver={() => this.handleMouseOver(index)}
                                 onMouseOut={() => this.handleMouseOut()}
                                 >
-                                    {this.renderIcons(song, index)} {song.title} - {song.duration} seconds.
+                                    {this.renderIcons(song, index)} {song.title} - {this.formatTime(parseInt(song.duration))}
                                 </tr>
                             );
                         })
