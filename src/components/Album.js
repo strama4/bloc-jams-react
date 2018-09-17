@@ -35,8 +35,6 @@ class Album extends Component {
             volumechange: e => {
                 this.setState({ volume: this.audioElement.volume });
             }
-
-
         };
         this.audioElement.addEventListener('timeupdate', this.eventListeners.timeupdate);
         this.audioElement.addEventListener('durationchange', this.eventListeners.durationchange);
@@ -136,21 +134,29 @@ class Album extends Component {
             return "0:00";
         }
         
-    }
+}
             
     render() {
         return (
             <div className="mdl-grid">
                 <div className="mdl-layout-spacer"></div>
                 <section className="album mdl-cell--middle mdl-cell--4-col">
-                    <section id="album-info">
-                        <img id="album-cover-art" src={this.state.album.albumCover} alt={this.state.album.title}/>
-                        <div className="album-details">
-                            <h1 id="album-title">{this.state.album.title}</h1>
-                            <h2 className="artist">{this.state.album.artist}</h2>
-                            <div id="release-info">{this.state.album.releaseInfo}</div>
+                    <div className="mdl-grid">
+                        <section id="album-info" className="mdl-cell--col-11">
+                            <img id="album-cover-art" src={this.state.album.albumCover} alt={this.state.album.title}/>
+                        </section>
+                        <section className="mdl-cell--col-1">
+
+                        </section>
+                            
+                    </div>
+                   
+                        <div className="song-details">
+                            <h4 className="left-items">{this.state.currentSong.title}</h4>
+                            <h6 className="artist left-items no-spacing">{this.state.album.artist}</h6>
+                            <h6 className="album left-items no-spacing" id="album-title">{this.state.album.title}</h6>
+                            
                         </div>
-                    </section>
                     
                     <PlayerBar
                         isPlaying={this.state.isPlaying} 
@@ -165,33 +171,35 @@ class Album extends Component {
                         handleVolumeChange={(e) => this.handleVolumeChange(e)}
                         formatTime={(e) => this.formatTime(e)} 
                     />
-                    <table id="song-list">
-                        <colgroup>
-                            <col id="song-number-column" />
-                            <col id="song-title-column" />
-                            <col id="song-duration-column" />
-                        </colgroup>
-                        <tbody>
-                        { 
-                            this.state.album.songs.map((song, index) => {
-                                return (
-                                    <tr key={index} className="song"                                 
-                                    onClick={() => this.handleSongClick(song, index)}
-                                    onMouseOver={() => this.handleMouseOver(index)}
-                                    onMouseOut={() => this.handleMouseOut()}
-                                    >
-                                        {this.renderIcons(song, index)} {song.title} - {song.duration} seconds.
-                                    </tr>
-                                );
-                            })
-                        } 
-                        </tbody>
-                    </table>
+                    <div className="mdl-grid">
+                        <div className="mdl-cell mdl-cell--8-col">
+                            <table id="song-list" className="left-items">
+                                <colgroup>
+                                    <col id="song-number-column" />
+                                    <col id="song-title-column" />
+                                    <col id="song-duration-column" />
+                                </colgroup>
+                                <tbody>
+                                { 
+                                    this.state.album.songs.map((song, index) => {
+                                        return (
+                                            <tr key={index} className="song"                                 
+                                            onClick={() => this.handleSongClick(song, index)}
+                                            onMouseOver={() => this.handleMouseOver(index)}
+                                            onMouseOut={() => this.handleMouseOut()}
+                                            >
+                                                {this.renderIcons(song, index)} {song.title} - {this.formatTime(parseInt(song.duration))}
+                                            </tr>
+                                        );
+                                    })
+                                } 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>                                        
                 </section>
                 <div className="mdl-layout-spacer"></div>
             </div>
-            
-
         );        
     }
 } 

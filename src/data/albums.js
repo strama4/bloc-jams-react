@@ -50,4 +50,4 @@ export default [{
       { title: 'Pink', duration: '153.14', audioSrc: '/assets/music/pink.mp3' },
       { title: 'Magenta', duration: '374.22', audioSrc: '/assets/music/magenta.mp3' }
     ]
-}];
+}, ];

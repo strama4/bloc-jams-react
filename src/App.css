@@ -33,11 +33,28 @@ img {
   object-fit: contain;
 }
 
-
-.album-card > .mdl-card__title {
-  
-}
-
 .mdl-grid {
   max-width: 100%;
+}
+
+.left-items {
+  text-align: left;
+}
+
+.time-control {
+  max-width: 100%;
+  margin-top: 10px;
+}
+
+.volume-control {
+  max-width:50%;
+}
+
+.no-spacing {
+  padding: 0;
+  margin: 0;
+}
+
+.album {
+  margin-bottom: 10px;
 }
