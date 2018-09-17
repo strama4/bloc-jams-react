@@ -12,17 +12,35 @@ class Library extends Component {
 
   render() {
     return (
-      <section className="library">
+      
+      <section className="library mdl-grid">
         {
           this.state.albums.map((album, index) => 
-            <Link to={`album/${album.slug}`} key={index} >
-              <img src={album.albumCover} alt={album.title} />
-              <div>{album.title}</div>
-              <div>{album.artist}</div>
-              <div>{album.songs.length} songs</div>
-            </Link>
+          <div className="mdl-cell mdl-cell--3-col">
+            <div className="album-card mdl-card mdl-shadow--16dp">
+              <Link to={`album/${album.slug}`} key={index} >
+                <div class="mdl-card__media">
+                  <img src={album.albumCover} alt={album.title} height="200" />
+                </div>
+                <div>
+                  <div className="mdl-card__subtitle">
+                    <h2 className="mdl-card__subtitle-text">{album.title}</h2>
+                  </div>
+                  <div className>
+                    <h2 className="mdl-card__subtitle-text">{album.artist}</h2>
+                  </div>
+                  <div>
+                    <h2 className="mdl-card__subtitle-text">{album.songs.length} songs</h2>
+                  </div>
+                </div>
+                
+              </Link>
+            </div>
+          </div>
+            
         )
         }
+        
       </section>
     );
   }
