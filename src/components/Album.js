@@ -72,6 +72,12 @@ class Album extends Component {
             this.play();
         }
     }
+    
+    handleTimeChange(e) {
+        const newTime = this.audioElement.duration * e.target.value;
+        this.audioElement.currentTime = newTime;
+        this.setState({ currentTime: newTime });
+    }
 
     handleMouseOver(index) {
         this.setState({ isHovering: index });        
@@ -113,11 +119,7 @@ class Album extends Component {
         // Button will not respond if already last song in the album.
     }
 
-    handleTimeChange(e) {
-        const newTime = this.audioElement.duration * e.target.value;
-        this.audioElement.currentTime = newTime;
-        this.setState({ currentTime: newTime });
-    }
+    
 
     handleVolumeChange(e) {
         this.audioElement.volume = e.target.value;
